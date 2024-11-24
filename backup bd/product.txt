@@ -1,0 +1,14 @@
+1	Jordan 1	750	5	https://www.sportvision.ro/files/thumbs/files/images/slike_proizvoda/media/881/881572-110/images/thumbs_800/881572-110_1_800_800px.jpg	2	1
+2	Papuci Jordan	75	10	https://www.sportvision.ro/files/thumbs/files/images/slike_proizvoda/media/881/881572-110/images/thumbs_800/881572-110_1_800_800px.jpg	1	1
+3	Jordan 6	849	10	https://www.sportvision.ro/files/thumbs/files/images/slike_proizvoda/media/881/881572-110/images/thumbs_800/881572-110_1_800_800px.jpg	2	1
+4	Jordan 11	749	10	https://www.sportvision.ro/files/thumbs/files/images/slike_proizvoda/media/881/881572-110/images/thumbs_800/881572-110_1_800_800px.jpg	2	1
+5	Jordan MVP	900	15	https://www.sportvision.ro/files/thumbs/files/images/slike_proizvoda/media/881/881572-110/images/thumbs_800/881572-110_1_800_800px.jpg	2	1
+6	Jordan Max Aura	750	15	https://www.sportvision.ro/files/thumbs/files/images/slike_proizvoda/media/881/881572-110/images/thumbs_800/881572-110_1_800_800px.jpg	2	1
+7	Air Max 97	950	20	https://www.sportvision.ro/files/thumbs/files/images/slike_proizvoda/media/881/881572-110/images/thumbs_800/881572-110_1_800_800px.jpg	2	1
+8	Air Force 1	650	20	https://www.sportvision.ro/files/thumbs/files/images/slike_proizvoda/media/881/881572-110/images/thumbs_800/881572-110_1_800_800px.jpg	2	1
+9	Uptempo	650	7	https://www.sportvision.ro/files/thumbs/files/images/slike_proizvoda/media/881/881572-110/images/thumbs_800/881572-110_1_800_800px.jpg	2	1
+10	Dunk Low	650	13	https://www.sportvision.ro/files/thumbs/files/images/slike_proizvoda/media/881/881572-110/images/thumbs_800/881572-110_1_800_800px.jpg	2	1
+11	Jordan 13	1000	10	https://www.sportvision.ro/files/thumbs/files/images/slike_proizvoda/media/881/881572-110/images/thumbs_800/881572-110_1_800_800px.jpg	2	1
+16	Air Force 1	476	7		2	1
+17	Air Force 1	476	7		2	1
+18	Flip flops	535.5	0		1	1

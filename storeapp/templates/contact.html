@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <header class="header bg-primary text-white text-center py-3">
+        <h1>Contact</h1>
+        <div class="d-flex justify-content-left" style="position: absolute; top: 20px; left: 20px;">
+            <a href="{% url 'home' %}" class="btn btn-light mx-2">Home</a>
+            <a href="{% url 'products' %}" class="btn btn-light mx-2">Catalog</a>
+            <a href="{% url 'contact' %}" class="btn btn-light mx-2">Contact</a>
+            {% comment %} <a href="{% url 'login' %}" class="btn btn-light mx-2">Login</a> {% endcomment %}
+        </div>    
+    </header>
+    <main class="container mt-5" style="position: absolute">
+        <div class="row">
+            <div class="col-md-4 ml-4">
+                <form method="post" class="needs-validation" novalidate>
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group">
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            {{ field }}
+                            {% if field.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {% for error in field.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger mt-3">
+                        {% for error in form.non_field_errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+</body>
+</html>

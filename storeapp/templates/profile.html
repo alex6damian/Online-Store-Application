@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h1>Profile Page</h1>   
+            </div>
+            <div class="card-body">
+                <div class="text-center">
+                    {% if user.profile_picture %}
+                        <img src="{{ user.profile_picture.url }}" class="rounded-circle" alt="Profile Picture" width="150" height="150">
+                    {% else %}
+                        <div class="rounded-circle" style="width: 150px; height: 150px; background-color: #e9ecef;"></div>
+                    {% endif %}
+                </div>
+                <p><strong>Username:</strong> {{ user.username }}</p>
+                <p><strong>Email:</strong> {{ user.email }}</p>
+                <p><strong>First Name:</strong> {{ user.first_name }}</p>
+                <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+                <p><strong>Phone Number:</strong> {{ user.phone_number }}</p>
+                <p><strong>Address:</strong> {{ user.address }}</p>
+                <p><strong>Birth Date:</strong> {{ user.birth_date }}</p>
+                <p><strong>Bio:</strong> {{ user.bio }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="text-center mt-3">
+        <a href="{% url 'change_password' %}" class="btn btn-primary">Change password</a>
+        <a href="{% url 'edit_profile' %}" class="btn btn-warning">Edit profile</a>
+        <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

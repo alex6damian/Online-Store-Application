@@ -1,10 +1,26 @@
-.products-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+header{
+    position: relative;
 }
-.product {
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
+
+/* Stilizare header */
+.catalog{
+    position: absolute;
+    left: 50%;
+    size: 600px;
+    color:purple;
+    transform: translateX(-50%);
 }
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.main {
+    flex: 1;
+}
+

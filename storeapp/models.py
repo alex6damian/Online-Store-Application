@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser, Group, Permission
 
 class Discount(models.Model):
     discount_id = models.AutoField(primary_key=True)
@@ -56,4 +57,29 @@ class Order(models.Model):
     
     def __str__(self):
         return str(self.order_id) 
+    
 
+class CustomUser(AbstractUser):
+    phone_number = models.CharField(max_length=15, null=False, blank=False)
+    address = models.CharField(max_length=255, null=False, blank=False)
+    birth_date = models.DateField(null=False, blank=False)
+    profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
+    bio = models.TextField(null=True, blank=True)
+
+    groups = models.ManyToManyField(
+        Group,
+        related_name='customuser_set',  # Adaugă related_name pentru a evita conflictul
+        blank=True,
+        help_text='The groups this user belongs to.',
+        related_query_name='customuser',
+    )
+    user_permissions = models.ManyToManyField(
+        Permission,
+        related_name='customuser_set',  # Adaugă related_name pentru a evita conflictul
+        blank=True,
+        help_text='Specific permissions for this user.',
+        related_query_name='customuser',
+    )
+
+    def __str__(self):
+        return self.username

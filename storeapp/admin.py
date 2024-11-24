@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 from . import models
 
 # Customizing the admin interface
@@ -36,6 +37,8 @@ class DiscountAdmin(admin.ModelAdmin):
 class OrderAdmin(admin.ModelAdmin):
     search_fields = ('order_id',) # search by order_id
     ordering = ('order_date',) # order by order_date
+
+
         
 
 # Register models
@@ -44,6 +47,7 @@ admin.site.register(models.Dealer, DealerAdmin)
 admin.site.register(models.Discount, DiscountAdmin)
 admin.site.register(models.Order, OrderAdmin)
 admin.site.register(models.Product, ProductAdmin)
+admin.site.register(models.CustomUser, UserAdmin)
 
 # Customize the admin site
 admin.site.site_header = 'Store App Administration'

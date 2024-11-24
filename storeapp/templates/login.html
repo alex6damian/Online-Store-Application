@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sneakers Store</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <header class="header bg-primary text-white text-center py-3">
+        <h1>Login</h1>    
+        <div class="d-flex justify-content-left" style="position: absolute; top: 20px; left: 20px;">
+            <a href="{% url 'home' %}" class="btn btn-light mx-2">Home</a>
+            <a href="{% url 'products' %}" class="btn btn-light mx-2">Catalog</a>
+            <a href="{% url 'contact' %}" class="btn btn-light mx-2">Contact</a>
+            {% comment %} <a href="{% url 'login' %}" class="btn btn-light mx-2">Login</a> {% endcomment %}
+        </div>
+    </header>
+    <main class="container mt-5">
+        <h1>Login</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_username">Username</label>
+                {{ form.username }}
+            </div>
+            <div class="form-group">
+                <label for="id_password">Password</label>
+                {{ form.password }}
+            </div>
+            <div class="form-check">
+                {{ form.remember_me }}
+                <label class="form-check-label" for="id_remember_me">Remember Me</label>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success">Login</button>
+            <a href="{% url 'register' %}" class="btn btn-secondary">Create account</a>
+        </form>
+        {% if form.errors %}
+            <div class="alert alert-danger mt-3">
+                <ul>
+                    {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        </main>
+    <footer class="footer bg-light text-center py-3 mt-4">
+        <p>&copy; Making it easier for customers since 2024</p>
+    </footer>
+</body>
+</html>
