@@ -1,6 +1,6 @@
 from django import forms
 from django.db import models
-from .models import Dealer, Category, Product, CustomUser
+from .models import Dealer, Category, Product, CustomUser, Promotion
 from datetime import date
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 import json, time, os, re
@@ -15,6 +15,7 @@ class ProductForm(forms.Form):
     image_url = forms.CharField(max_length=2083, label='Image URL', required=True)
     dealer = forms.ModelChoiceField(queryset=Dealer.objects.all(), required=True)
     category = forms.ModelChoiceField(queryset=Category.objects.all(), required=True)
+    
     
     def clean(self):
         cleaned_data = super().clean()
@@ -38,12 +39,34 @@ class ProductForm(forms.Form):
             raise forms.ValidationError('Category must be selected')
         return cleaned_data
 
+class FilterProductsForm(forms.Form):
+    category = forms.ModelChoiceField(
+        queryset=Category.objects.all(), 
+        required=False, 
+        empty_label="Select a category"
+    )
+    only_in_stock = forms.BooleanField(required=False, label='Only in stock')
+    price_range = forms.FloatField(
+        initial = 0,
+        min_value = 0,
+        max_value = 1000,
+        widget=forms.NumberInput(attrs={'type': 'range', 'min': '0', 'max': '1000', 'step': '10'}),
+        required=False,
+        label='Price Range'
+    )
+    def clean(self):
+        cleaned_data = super().clean()
+        price_range = cleaned_data.get('price_range')
+        if price_range is not None and (price_range < 0 or price_range > 10000):
+            raise forms.ValidationError('Price range must be between 0 and 10000')
+        return cleaned_data
+
 class ContactForm(forms.Form):
     first_name = forms.CharField(max_length=10, required=True, label = 'First Name')
-    second_name = forms.CharField(max_length=15, required=False, label = 'Second Name')
+    second_name = forms.CharField(max_length=15, required=True, label = 'Second Name')
     birth_date = forms.DateField(
         widget=forms.DateInput(attrs={'type': 'date'}),
-        required=False,
+        required=True,
         label='Birth Date'
     )
     email = forms.EmailField(required=True, label = 'Email')
@@ -55,10 +78,10 @@ class ContactForm(forms.Form):
         ('request', 'Request'),
         ('appoinment', 'Appoinment'),
     ]
-    message_type = forms.ChoiceField(choices=message_type_choises, required=False, label = 'Message Type')
+    message_type = forms.ChoiceField(choices=message_type_choises, required=True, label = 'Message Type')
     subject = forms.CharField(max_length=15, required=True, label = 'Subject')
-    waiting_time = forms.IntegerField(required=False, label = 'Waiting Time')
-    message = forms.CharField(widget=forms.Textarea, required = False, label = 'Message') 
+    waiting_time = forms.IntegerField(required=True, label = 'Waiting Time')
+    message = forms.CharField(widget=forms.Textarea(attrs={'rows': 2, 'cols': 40}), required=True, label='Message')
 
     def clean(self):
         cleaned_data = super().clean()
@@ -126,7 +149,7 @@ class ContactForm(forms.Form):
             json.dump(data_to_save, json_file, indent=4)
         
         return cleaned_data
-    
+
 class AddProduct(forms.ModelForm):
     
     field1 = forms.IntegerField(required=True, label = 'TVA')
@@ -225,6 +248,9 @@ class RegisterForm(UserCreationForm):
             'profile_picture': 'Profile Picture',
             'bio': 'Bio',
         }
+        widgets = {
+            'bio' : forms.Textarea(attrs={'rows': 2, 'cols': 40}),
+        }
         help_texts = {
             'username': 'Enter your username. Only letters, digits and @/./+/-/_ are allowed.',
             'email': 'Enter your email address.',
@@ -310,7 +336,7 @@ class EditProfileForm(UserChangeForm):
             'first_name': forms.TextInput(attrs={'required': False}),
             'last_name': forms.TextInput(attrs={'required': False}),
             'address': forms.TextInput(attrs={'required': False}),
-            'bio': forms.Textarea(attrs={'required': False}),
+            'bio': forms.Textarea(attrs={'required': False, 'rows': 2, 'cols': 40}),
         }
         labels = {
             'first_name': 'First Name',
@@ -357,5 +383,88 @@ class EditProfileForm(UserChangeForm):
             self.add_error('address', self.Meta.error_messages['address']['invalid'])
         if bio and not re.match(r'^[A-Za-z0-9,.!\s]+$', bio):
             self.add_error('bio', self.Meta.error_messages['bio']['invalid'])
+        
+        return cleaned_data
+    
+class PromotionForm(forms.ModelForm):
+    combined_choices = forms.MultipleChoiceField(
+        choices=[],
+        required=True,
+        widget=forms.CheckboxSelectMultiple,
+        label='Options',
+    )
+    class Meta:
+        model = Promotion
+        fields = ['name', 'message', 'start_date', 'end_date', 'discount', 'description']
+        labels = {
+            'name': 'Promotion Name',
+            'message': 'Message',
+            'start_date': 'Start Date',
+            'end_date': 'End Date',
+            'discount': 'Discount',
+            'description': 'Description',
+        }
+        widgets = {
+            'message': forms.Textarea(attrs={'rows': 2, 'cols': 40}),
+            'start_date': forms.DateInput(attrs={'type': 'date'}),
+            'end_date': forms.DateInput(attrs={'type': 'date'}),
+        }
+        help_texts = {
+            'name': 'Enter the promotion name. Only letters and spaces are allowed.',
+            'message': 'Enter the message for the promotion.',
+            'discount': 'Enter the discount rate. Must be a positive number.',
+            'description': 'Enter the description of the promotion.',
+        }
+        error_messages = {
+            'name': {
+                'required': 'Promotion name is required',
+            },
+            'message': {
+                'required': 'Message is required',
+            },
+            'discount': {
+                'required': 'Discount is required',
+            },
+            'description': {
+                'required': 'Description is required',
+            },
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(PromotionForm, self).__init__(*args, **kwargs)
+        categories = Category.objects.all()
+        dealers = Dealer.objects.all()
+        combined_choices = [(f'category_{category.category_id}', f'Category: {category.name}') for category in categories]
+        combined_choices += [(f'dealer_{dealer.dealer_id}', f'Brand: {dealer.name}') for dealer in dealers]
+        self.fields['combined_choices'].choices = combined_choices
+        
+        # Set default selected choices
+        default_selected = [choice[0] for choice in combined_choices]
+        self.fields['combined_choices'].initial = default_selected
+
+    def clean(self):
+        cleaned_data = super().clean()
+        name = cleaned_data.get('name')
+        message = cleaned_data.get('message')
+        start_date = cleaned_data.get('start_date')
+        end_date = cleaned_data.get('end_date')
+        discount = cleaned_data.get('discount')
+        description = cleaned_data.get('description')
+        combined_choices = cleaned_data.get('combined_choices')
+
+        if not re.match(r'^[A-Za-z\s]+$', name):
+            raise forms.ValidationError('Name must contain only letters and spaces')
+        if len(name) < 3:
+            raise forms.ValidationError('Name must be at least 3 characters long')
+        if not re.match(r'^[A-Za-z0-9\s]+$', message):
+            raise forms.ValidationError('Message must contain only letters, digits and spaces')
+        if not re.match(r'^[A-Za-z0-9\s]+$', description):
+            raise forms.ValidationError('Description must contain only letters, digits and spaces')
+        if discount is None or discount < 0:
+            raise forms.ValidationError('Discount must be a positive number')
+        if start_date > end_date:
+            raise forms.ValidationError('Start date must be before end date')
+        if not combined_choices:
+            raise forms.ValidationError('At least one category or dealer must be selected')
         
         return cleaned_data

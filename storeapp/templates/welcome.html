@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome!</title>
+</head>
+<body>
+    <h1>Welcome, {{ first_name }} {{ last_name }}!</h1>
+    <h2>Username: {{ username }}</h2>
+    <p>Please confirm your account here:</p>
+    <a href="http://localhost:8000/storeapp/confirm/{{ confirmation_code }}">Confirm account</a>
+</body>
+</html>

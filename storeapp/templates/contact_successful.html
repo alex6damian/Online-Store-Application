@@ -4,13 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <header>
-        <h1>Message has been successfully sent.</h1>
-    </header>
-    <main>
-        <a href="{% url 'contact' %}">Send another message</a>
-    </main>
-</body>
+    <div class = "container mt-5">
+        <div class = "card">
+            <div class = "card-header">
+                <h1>Contact</h1>
+            </div>
+        <div class = "card-footer">
+            <div class="text-center mt-1">
+        <a href="{% url 'home' %}" class="btn btn-primary">Home</a>
+        <a href="{% url 'contact' %}" class="btn btn-primary">Send another message</a>
+        </div>
+        </div>
+        </div>
+    </body>
+    <div class="text-center">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% endif %}
+        {% if form.errors %}
+            <div class="alert alert-danger mt-3">
+                <ul>
+                    {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+
 </html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>403 Forbidden</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light text-center">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="display-4">{{ title|default:"Error 403" }}</h1>
+                {% if user.is_authenticated %}
+                    <h2 class="mt-4">Hello, {{ user.username }}</h2>
+                {% else %}
+                    <p class="mt-4">Hello stranger</p>
+                {% endif %}
+                <p class="lead mt-3">{{ custom_message }}</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

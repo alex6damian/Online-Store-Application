@@ -1,0 +1,724 @@
+CRITICAL 2024-12-08 15:45:22,412 views Suspicious login attempt detected
+CRITICAL 2024-12-08 15:46:13,497 views Attempt to register with admin username
+ERROR 2024-12-09 15:56:06,769 log Internal Server Error: /storeapp/login/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\facultate\django\proiect\storeapp\views.py", line 174, in login_view
+    if form.cleaned_data.get('confirmed_mail') == False:
+       ^^^^^^^^^^^^^^^^^
+AttributeError: 'LoginForm' object has no attribute 'cleaned_data'. Did you mean: 'changed_data'?
+ERROR 2024-12-09 15:56:06,774 basehttp "POST /storeapp/login/ HTTP/1.1" 500 71985
+ERROR 2024-12-09 15:57:27,558 log Internal Server Error: /storeapp/login/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\facultate\django\proiect\storeapp\views.py", line 175, in login_view
+    if not user.confirmed_mail:
+           ^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\utils\functional.py", line 253, in inner
+    return func(_wrapped, *args)
+           ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'AnonymousUser' object has no attribute 'confirmed_mail'
+ERROR 2024-12-09 15:57:27,560 basehttp "POST /storeapp/login/ HTTP/1.1" 500 76295
+ERROR 2024-12-09 15:57:35,759 log Internal Server Error: /storeapp/login/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\facultate\django\proiect\storeapp\views.py", line 175, in login_view
+    if not user.confirmed_mail:
+           ^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\utils\functional.py", line 253, in inner
+    return func(_wrapped, *args)
+           ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'AnonymousUser' object has no attribute 'confirmed_mail'
+ERROR 2024-12-09 15:57:35,762 basehttp "POST /storeapp/login/ HTTP/1.1" 500 76295
+ERROR 2024-12-09 15:58:07,195 log Internal Server Error: /storeapp/login/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\facultate\django\proiect\storeapp\views.py", line 174, in login_view
+    user = CustomUser.objects.get(username=form.cleaned_data.get('username'))
+                                           ^^^^^^^^^^^^^^^^^
+AttributeError: 'LoginForm' object has no attribute 'cleaned_data'. Did you mean: 'changed_data'?
+ERROR 2024-12-09 15:58:07,198 basehttp "POST /storeapp/login/ HTTP/1.1" 500 72089
+ERROR 2024-12-09 16:00:04,346 log Internal Server Error: /storeapp/login/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\facultate\django\proiect\storeapp\views.py", line 175, in login_view
+    if not user.confirmed_mail:
+           ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'confirmed_mail'
+ERROR 2024-12-09 16:00:04,348 basehttp "POST /storeapp/login/ HTTP/1.1" 500 72142
+ERROR 2024-12-09 16:13:42,552 log Internal Server Error: /storeapp/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\template\base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'static'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\facultate\django\proiect\storeapp\views.py", line 21, in home
+    return render(request, 'home.html')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\template\base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\template\base.py", line 573, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 8: 'static'. Did you forget to register or load this tag?
+ERROR 2024-12-09 16:13:42,560 basehttp "GET /storeapp/ HTTP/1.1" 500 146500
+ERROR 2024-12-09 16:44:39,606 log Internal Server Error: /storeapp/logout/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\facultate\django\proiect\storeapp\views.py", line 211, in logout_view
+    user = CustomUser.objects.get(username=user['username'])
+                                           ~~~~^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\utils\functional.py", line 253, in inner
+    return func(_wrapped, *args)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'CustomUser' object is not subscriptable
+ERROR 2024-12-09 16:44:39,609 basehttp "GET /storeapp/logout/ HTTP/1.1" 500 74841
+ERROR 2024-12-09 16:46:18,401 log Internal Server Error: /storeapp/deal/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\facultate\django\proiect\storeapp\views.py", line 327, in deal
+    random_code = register_view.generate_random_code(length=5)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'function' object has no attribute 'generate_random_code'
+ERROR 2024-12-09 16:46:18,406 basehttp "GET /storeapp/deal/ HTTP/1.1" 500 70850
+ERROR 2024-12-09 16:46:44,273 log Internal Server Error: /storeapp/deal/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.StringDataRightTruncation: value too long for type character varying(20)
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\facultate\django\proiect\storeapp\views.py", line 328, in deal
+    Discount.objects.create(code=random_code, rate=50, expiration_date=datetime.date.today() + datetime.timedelta(days=7))
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\query.py", line 679, in create
+    obj.save(force_insert=True, using=self.db)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\base.py", line 891, in save
+    self.save_base(
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\base.py", line 997, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\base.py", line 1160, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\base.py", line 1201, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\query.py", line 1847, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\sql\compiler.py", line 1836, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.DataError: value too long for type character varying(20)
+
+ERROR 2024-12-09 16:46:44,278 basehttp "GET /storeapp/deal/ HTTP/1.1" 500 151092
+ERROR 2024-12-09 16:46:45,404 log Internal Server Error: /storeapp/deal/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.StringDataRightTruncation: value too long for type character varying(20)
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\facultate\django\proiect\storeapp\views.py", line 328, in deal
+    Discount.objects.create(code=random_code, rate=50, expiration_date=datetime.date.today() + datetime.timedelta(days=7))
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\query.py", line 679, in create
+    obj.save(force_insert=True, using=self.db)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\base.py", line 891, in save
+    self.save_base(
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\base.py", line 997, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\base.py", line 1160, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\base.py", line 1201, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\query.py", line 1847, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\sql\compiler.py", line 1836, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.DataError: value too long for type character varying(20)
+
+ERROR 2024-12-09 16:46:45,408 basehttp "GET /storeapp/deal/ HTTP/1.1" 500 151092
+ERROR 2024-12-09 16:48:14,325 log Internal Server Error: /storeapp/deal/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "storeapp_discount_pkey"
+DETAIL:  Key (discount_id)=(1) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\facultate\django\proiect\storeapp\views.py", line 329, in deal
+    Discount.objects.create(code=random_code, rate=50, expiration_date=datetime.date.today() + datetime.timedelta(days=7))
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\query.py", line 679, in create
+    obj.save(force_insert=True, using=self.db)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\base.py", line 891, in save
+    self.save_base(
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\base.py", line 997, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\base.py", line 1160, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\base.py", line 1201, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\query.py", line 1847, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\sql\compiler.py", line 1836, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: duplicate key value violates unique constraint "storeapp_discount_pkey"
+DETAIL:  Key (discount_id)=(1) already exists.
+
+ERROR 2024-12-09 16:48:14,330 basehttp "GET /storeapp/deal/ HTTP/1.1" 500 150634
+ERROR 2024-12-09 16:49:17,036 log Internal Server Error: /storeapp/deal/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "storeapp_discount_pkey"
+DETAIL:  Key (discount_id)=(2) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\facultate\django\proiect\storeapp\views.py", line 329, in deal
+    Discount.objects.create(code=random_code, rate=50, expiration_date=datetime.date.today() + datetime.timedelta(days=7))
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\query.py", line 679, in create
+    obj.save(force_insert=True, using=self.db)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\base.py", line 891, in save
+    self.save_base(
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\base.py", line 997, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\base.py", line 1160, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\base.py", line 1201, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\query.py", line 1847, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\models\sql\compiler.py", line 1836, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\-_SHv_4lM\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: duplicate key value violates unique constraint "storeapp_discount_pkey"
+DETAIL:  Key (discount_id)=(2) already exists.
+
+ERROR 2024-12-09 16:49:17,041 basehttp "GET /storeapp/deal/ HTTP/1.1" 500 150634
+ERROR 2024-12-12 14:14:16,821 log Internal Server Error: /storeapp/cart/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view storeapp.views.cart didn't return an HttpResponse object. It returned None instead.
+ERROR 2024-12-12 14:14:16,823 basehttp "GET /storeapp/cart/ HTTP/1.1" 500 72093
+ERROR 2024-12-12 14:15:36,284 log Internal Server Error: /storeapp/cart/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view storeapp.views.cart didn't return an HttpResponse object. It returned None instead.
+ERROR 2024-12-12 14:15:36,287 basehttp "GET /storeapp/cart/ HTTP/1.1" 500 72230
+ERROR 2024-12-12 14:15:36,935 log Internal Server Error: /storeapp/cart/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view storeapp.views.cart didn't return an HttpResponse object. It returned None instead.
+ERROR 2024-12-12 14:15:36,937 basehttp "GET /storeapp/cart/ HTTP/1.1" 500 72230
+ERROR 2024-12-12 14:15:37,416 log Internal Server Error: /storeapp/cart/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view storeapp.views.cart didn't return an HttpResponse object. It returned None instead.
+ERROR 2024-12-12 14:15:37,418 basehttp "GET /storeapp/cart/ HTTP/1.1" 500 72230
+ERROR 2024-12-12 14:15:37,733 log Internal Server Error: /storeapp/cart/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view storeapp.views.cart didn't return an HttpResponse object. It returned None instead.
+ERROR 2024-12-12 14:15:37,737 basehttp "GET /storeapp/cart/ HTTP/1.1" 500 72230
+ERROR 2024-12-12 14:15:38,058 log Internal Server Error: /storeapp/cart/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view storeapp.views.cart didn't return an HttpResponse object. It returned None instead.
+ERROR 2024-12-12 14:15:38,060 basehttp "GET /storeapp/cart/ HTTP/1.1" 500 72230
+ERROR 2024-12-12 14:15:38,160 log Internal Server Error: /storeapp/cart/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view storeapp.views.cart didn't return an HttpResponse object. It returned None instead.
+ERROR 2024-12-12 14:15:38,163 basehttp "GET /storeapp/cart/ HTTP/1.1" 500 72230
+ERROR 2024-12-12 14:15:38,340 log Internal Server Error: /storeapp/cart/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view storeapp.views.cart didn't return an HttpResponse object. It returned None instead.
+ERROR 2024-12-12 14:15:38,344 basehttp "GET /storeapp/cart/ HTTP/1.1" 500 72230
+ERROR 2024-12-12 14:15:41,999 log Internal Server Error: /storeapp/cart/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view storeapp.views.cart didn't return an HttpResponse object. It returned None instead.
+ERROR 2024-12-12 14:15:42,003 basehttp "GET /storeapp/cart/ HTTP/1.1" 500 72093
+ERROR 2024-12-12 14:16:33,902 log Internal Server Error: /storeapp/cart/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view storeapp.views.cart didn't return an HttpResponse object. It returned None instead.
+ERROR 2024-12-12 14:16:33,911 basehttp "GET /storeapp/cart/ HTTP/1.1" 500 72230
+ERROR 2024-12-12 14:16:34,883 log Internal Server Error: /storeapp/cart/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view storeapp.views.cart didn't return an HttpResponse object. It returned None instead.
+ERROR 2024-12-12 14:16:34,885 basehttp "GET /storeapp/cart/ HTTP/1.1" 500 72230
+ERROR 2024-12-12 14:16:35,266 log Internal Server Error: /storeapp/cart/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view storeapp.views.cart didn't return an HttpResponse object. It returned None instead.
+ERROR 2024-12-12 14:16:35,268 basehttp "GET /storeapp/cart/ HTTP/1.1" 500 72230
+ERROR 2024-12-12 14:16:35,562 log Internal Server Error: /storeapp/cart/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view storeapp.views.cart didn't return an HttpResponse object. It returned None instead.
+ERROR 2024-12-12 14:16:35,565 basehttp "GET /storeapp/cart/ HTTP/1.1" 500 72230
+ERROR 2024-12-12 14:16:35,846 log Internal Server Error: /storeapp/cart/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view storeapp.views.cart didn't return an HttpResponse object. It returned None instead.
+ERROR 2024-12-12 14:16:35,848 basehttp "GET /storeapp/cart/ HTTP/1.1" 500 72230
+ERROR 2024-12-12 14:16:36,068 log Internal Server Error: /storeapp/cart/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view storeapp.views.cart didn't return an HttpResponse object. It returned None instead.
+ERROR 2024-12-12 14:16:36,071 basehttp "GET /storeapp/cart/ HTTP/1.1" 500 72230
+ERROR 2024-12-12 14:16:36,217 log Internal Server Error: /storeapp/cart/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view storeapp.views.cart didn't return an HttpResponse object. It returned None instead.
+ERROR 2024-12-12 14:16:36,219 basehttp "GET /storeapp/cart/ HTTP/1.1" 500 72230
+ERROR 2024-12-12 14:16:36,385 log Internal Server Error: /storeapp/cart/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view storeapp.views.cart didn't return an HttpResponse object. It returned None instead.
+ERROR 2024-12-12 14:16:36,388 basehttp "GET /storeapp/cart/ HTTP/1.1" 500 72230
+ERROR 2024-12-12 14:16:36,534 log Internal Server Error: /storeapp/cart/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view storeapp.views.cart didn't return an HttpResponse object. It returned None instead.
+ERROR 2024-12-12 14:16:36,537 basehttp "GET /storeapp/cart/ HTTP/1.1" 500 72230
+ERROR 2024-12-12 14:16:54,246 log Internal Server Error: /storeapp/cart/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\template\base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'static'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\facultate\django\proiect\storeapp\views.py", line 348, in cart
+    return render(request, 'cart.html')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\template\base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\template\base.py", line 573, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 7: 'static'. Did you forget to register or load this tag?
+ERROR 2024-12-12 14:16:54,251 basehttp "GET /storeapp/cart/ HTTP/1.1" 500 143612
+ERROR 2024-12-12 14:22:12,621 log Internal Server Error: /storeapp/cart/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view storeapp.views.cart didn't return an HttpResponse object. It returned None instead.
+ERROR 2024-12-12 14:22:12,625 basehttp "POST /storeapp/cart/ HTTP/1.1" 500 71979
+ERROR 2024-12-12 14:22:13,411 log Internal Server Error: /storeapp/cart/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view storeapp.views.cart didn't return an HttpResponse object. It returned None instead.
+ERROR 2024-12-12 14:22:13,414 basehttp "POST /storeapp/cart/ HTTP/1.1" 500 71979
+ERROR 2024-12-12 14:22:13,683 log Internal Server Error: /storeapp/cart/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view storeapp.views.cart didn't return an HttpResponse object. It returned None instead.
+ERROR 2024-12-12 14:22:13,686 basehttp "POST /storeapp/cart/ HTTP/1.1" 500 71979
+ERROR 2024-12-12 14:22:13,893 log Internal Server Error: /storeapp/cart/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view storeapp.views.cart didn't return an HttpResponse object. It returned None instead.
+ERROR 2024-12-12 14:22:13,896 basehttp "POST /storeapp/cart/ HTTP/1.1" 500 71979
+ERROR 2024-12-12 14:22:14,034 log Internal Server Error: /storeapp/cart/
+Traceback (most recent call last):
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "D:\-_SHv_4lM\Lib\site-packages\django\core\handlers\base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view storeapp.views.cart didn't return an HttpResponse object. It returned None instead.
+ERROR 2024-12-12 14:22:14,036 basehttp "POST /storeapp/cart/ HTTP/1.1" 500 71979

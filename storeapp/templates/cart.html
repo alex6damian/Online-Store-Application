@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    {% load static %}
+    <script src="{% static 'js/cart.js' %}"></script>
+</head>
+<body>
+    <h1>Cart</h1>
+    <div id="cart-items-container">
+        <!-- Cart items will be dynamically inserted here -->
+    </div>
+    <h2>Total: <span id="total-price">0</span></h2>
+</body>
+</html>
