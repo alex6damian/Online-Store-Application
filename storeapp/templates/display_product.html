@@ -4,35 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Details</title>
+    {% load static %}
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <script>
-        window.onload = function() {
-            let buttons = document.getElementsByClassName('add-to-cart');
-            for(let btn of buttons)
-            {
-                btn.onclick = function(){
-                    let product_ids = localStorage.getItem('cart'); // Get cart from local storage
-                    if(product_ids){
-                        let cart_array = product_ids.split(','); // Convert string to array
-                        if(cart_array.includes(this.dataset['id'])){ // Check if product is already in cart
-                            alert('Product is already in cart!'); // Alert user
-                        }
-                        else{ // If product is not in cart, add it
-                            cart_array.push(this.dataset['id']); // Add product to cart
-                            localStorage.setItem('cart', cart_array.join(',')); // Update cart
-                        }
-                    }
-                    else{
-                        localStorage.setItem('cart', this.dataset['id']); // Add product to cart
-                    }
-                }
-            }
-        }
-    </script>
+    {% include 'menu.html' %}
     <div class="container mt-5">
-        <h1 class="text-center">Product Details</h1>
         <div class="card mt-4">
             <div class="card-body text-center">
                 <img src="{{ product.image_url }}" class="card-img-top" alt="{{ product.name }}" style="width: 30%; height: auto;">
@@ -41,7 +18,7 @@
                 <p class="card-text"><strong>Category:</strong> {{ product.category }}</p>
                 <p class="card-text"><strong>Description:</strong> {{ product.description }}</p>
                 <p class="card-text"><strong>Stock left:</strong> {{ product.stock }}</p>
-                <button class="btn btn-primary add-to-cart" data-id="{{ product.id }}">Add to cart</button>
+                <button class='add-to-cart btn btn-success' data-name='{{product.name}}' data-stock='{{ product.stock }}' data-price='{{ product.price }}' data-id='{{ product.product_id }}'>Add to cart</button>
             </div>
         </div>
         <div class="text-center mt-4">
@@ -66,7 +43,8 @@
                 </ul>
             </div>
         {% endif %}
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="{% static 'js/addToCart.js' %}"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>

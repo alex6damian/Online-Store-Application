@@ -51,13 +51,28 @@ class Product(models.Model):
 
 class Order(models.Model):
     order_id = models.AutoField(primary_key=True)
-    quantity = models.IntegerField()
-    product = models.ManyToManyField(Product, related_name='product', default=None)
     order_date = models.DateField()
     
     def __str__(self):
         return str(self.order_id) 
     
+    @property
+    def total_price(self):
+        return sum([item.product.price * item.quantity for item in self.orderitem_set.all()])
+    
+    @property
+    def total_quantity(self):
+        return sum([item.quantity for item in self.orderitem_set.all()])
+
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+    
+    def __str__(self):
+        return f"{self.order.order_id} - {self.product.name} - {self.quantity}"    
+
 
 
 class CustomUser(AbstractUser):

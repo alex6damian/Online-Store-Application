@@ -4,7 +4,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.shortcuts import render, redirect
-from .models import Product, Category, CustomUser, Dealer, Promotion
+from .models import Product, Category, CustomUser, Dealer, Promotion, Order, OrderItem
 from django.contrib.auth import login, logout
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.decorators import login_required, permission_required
@@ -23,7 +23,11 @@ logger=logging.getLogger('django')
 # @csrf_exempt - decorator care dezactiveaza verificarea CSRF(cross site request forgery)
 def home(request):
     logger.debug('Home view accessed')
-    return render(request, 'home.html')
+    context = {
+        'page_title': 'Home',
+        'user_has_perm' : request.user.has_perm('storeapp.add_product'),
+    }
+    return render(request, 'home.html', context)
 
 
 def display_product(request, product_id):
@@ -40,18 +44,28 @@ def display_product(request, product_id):
         return HttpResponse('Product not found', status=404)
     if product.stock < 5:
         messages.warning(request, 'Only a few items left in stock.')
-    return render(request, 'display_product.html', {'product': product})
+    context = {
+        'product': product,
+        'page_title': 'Product Details',
+        'user_has_perm' : request.user.has_perm('storeapp.add_product'),
+    }
+    return render(request, 'display_product.html', context)
 
 
 def products(request):
     logger.debug('Products view accessed')
     form = forms.FilterProductsForm()
-    categories = Category.objects.all()
     products = Product.objects.all()
     paginator = Paginator(products, 5)
     page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    return render(request, 'products.html', {'form': form, 'page_obj': page_obj, 'categories': categories})
+    products = paginator.get_page(page_number)
+    context = {
+        'products': products,
+        'form': form,
+        'page_title': 'Products',
+        'user_has_perm' : request.user.has_perm('storeapp.add_product'),
+    }
+    return render(request, 'products.html', context)
 
 
 def filter_products(request):
@@ -65,13 +79,30 @@ def filter_products(request):
                 products = products.filter(category=form.cleaned_data['category'])
             if form.cleaned_data['price_range']:
                 products = products.filter(price__lte=form.cleaned_data['price_range'])
-            
+            if form.cleaned_data['only_in_stock']:
+                products = products.filter(stock__gt=0)
             paginator = Paginator(products, 5)
             page_number = request.GET.get('page')
             page_obj = paginator.get_page(page_number)
-            products_list = list(page_obj.object_list.values())
             messages.info(request, 'Filters applied successfully.')
-            return JsonResponse({'products': products_list})
+            products_data = []
+            for product in page_obj:
+                products_data.append({
+                    'id': product.product_id,
+                    'name': product.name,
+                    'price': product.price,
+                    'stock': product.stock,
+                })
+            context = {
+                'products': products_data,
+                'pagination': {
+                    'has_previous': page_obj.has_previous(),
+                    'has_next': page_obj.has_next(),
+                    'num_pages': paginator.num_pages,
+                    'current_page': page_obj.number,
+                }
+            }
+            return JsonResponse(context)
         else:
             messages.error(request, 'There was an error with your filter.')
     logger.warning('Invalid request in filter_products view')
@@ -86,7 +117,12 @@ def contact(request):
             return redirect('contact_successful')
     else:
         form = forms.ContactForm()
-    return render(request, 'contact.html', {'form': form})
+    context = {
+        'form': form,
+        'page_title': 'Contact',
+        'user_has_perm' : request.user.has_perm('storeapp.add_product'),
+    }
+    return render(request, 'contact.html', context)
 
 
 def contact_successful(request):
@@ -98,8 +134,8 @@ def contact_successful(request):
 def add_product(request):
     logger.debug('Add product view accessed')
     if request.user.is_authenticated:
-            if not request.user.groups.filter(name='Products Admins').exists():
-                return HttpResponseForbidden(render(request, '403.html', {'user': request.user,'title': 'Error adding products', 'custom_message': 'You do not have permission to add sneakers.'}))
+        if not request.user.has_perm('storeapp.add_product'):
+            return HttpResponseForbidden(render(request, '403.html', {'custom_message': 'You do not have permission to add products.'}))
     else:
         return HttpResponseForbidden(render(request, '403.html', {'custom_message': 'You must be logged in to add sneakers.'}))
     if request.method == "POST":
@@ -111,11 +147,19 @@ def add_product(request):
             return redirect('product_successful')
     else:
         form = forms.AddProduct()
-    return render(request, 'add_product.html', {'form': form})
+    context = {
+        'form': form,
+        'page_title': 'Add Product',
+    }
+    return render(request, 'add_product.html', context)
     
 def product_successful(request):
     logger.info('Product successful view accessed')
-    return render(request, 'add_product_successful.html')
+    context = {
+        'page_title': 'Product Added',
+        'user_has_perm' : request.user.has_perm('storeapp.add_product'),
+    }
+    return render(request, 'add_product_successful.html', context)
 
 
 def register_view(request):
@@ -182,14 +226,19 @@ def confirm_account(request, code):
 
 def login_view(request):
     logger.debug('Login view accessed')
-    if request.method == "POST":
+    if request.method == "POST":    
         form = forms.LoginForm(request, data=request.POST)
-        user = CustomUser.objects.get(username=form.data['username'])
-        if not user.confirmed_mail:
-            messages.warning(request, 'Please confirm your email address.')
-            return redirect('login')
+        try:
+            user = CustomUser.objects.get(username=form.data['username'])
+            if not user.confirmed_mail:
+                messages.warning(request, 'Please confirm your email address.')
+                return redirect('login')
+        except CustomUser.DoesNotExist:
+            messages.error(request, 'Invalid username or password.')
         if form.is_valid():
             login(request, form.get_user())
+            if user.username == 'administrator':
+                user.user_permissions.add(Permission.objects.get(codename='add_product'))
             if not form.cleaned_data.get('remember_me'):
                 request.session.set_expiry(0)
             else:
@@ -211,7 +260,7 @@ def login_view(request):
             request.session['login_attempts'] = login_attempts
     else:
         form = forms.LoginForm()
-    return render(request, 'login.html', {'form': form})
+    return render(request, 'login.html', {'form': form, 'page_title': 'Login'})
 
 
 def logout_view(request):
@@ -255,8 +304,12 @@ def profile(request):
             'last_name': request.user.last_name,
         }
         request.session['user_data'] = user_data
-            
-    return render(request, 'profile.html', {'user_data': user_data})
+    context = {
+        'user_data': user_data,
+        'page_title': 'Profile',
+        'user_has_perm' : request.user.has_perm('storeapp.add_product'),
+    }
+    return render(request, 'profile.html', context)
 
 
 def edit_profile(request):
@@ -271,7 +324,12 @@ def edit_profile(request):
             return redirect('profile')
     else:
         form = forms.EditProfileForm(instance=request.user)
-    return render(request, 'edit_profile.html', {'form': form})
+    context = {
+        'form': form,
+        'page_title': 'Edit Profile',
+        'user_has_perm' : request.user.has_perm('storeapp.add_product'),
+    }
+    return render(request, 'edit_profile.html', context)
 
 
 
@@ -301,7 +359,6 @@ def create_promotion(request):
                         message = f"Dear Customer, we have a new promotion. Check it out on this link: localhost:8000/storeapp/check_promotion/{promotion.promotion_id}/{category_id}"
                         from_email = 'alex6damian@gmail.com'
                         data_tuple.append((subject, message, from_email, emails))
-                print(data_tuple)
                 send_mass_mail(data_tuple, fail_silently=False, connection=None)
                 return redirect('create_promotion')
             except Exception as e:
@@ -345,4 +402,92 @@ def deal(request):
 @csrf_exempt
 def cart(request):
     if request.method == 'GET':
-        return render(request, 'cart.html')
+        discount_codes = Discount.objects.all();
+        for code in discount_codes:
+            if code.expiration_date < datetime.date.today():
+                code.delete()
+        discount_codes_dict = {code.code: code.rate for code in discount_codes}
+        context = {
+            'page_title': 'Cart',
+            'discount_codes': discount_codes_dict,
+        }
+        return render(request, 'cart.html', context)
+    
+
+from reportlab.pdfgen import canvas
+import os
+from pathlib import Path
+from django.utils import timezone
+
+ROOT = 'D:/Facultate/Django/Proiect/storeapp/temporary_invoices'
+def generate_pdf(orderList, userInfo):
+    if not os.path.exists(f'{ROOT}/{userInfo.first_name}_{userInfo.last_name}'):
+        os.makedirs(f'{ROOT}/{userInfo.first_name}_{userInfo.last_name}')
+
+     
+    order = Order.objects.create(
+        order_date=timezone.now(),
+    )
+    
+    for item in orderList:
+        product = Product.objects.get(product_id=item['id'])
+        OrderItem.objects.create(
+            order=order,
+            product=product,
+            quantity=item['quantity'],
+        )
+        
+    time = int((timezone.now() - datetime.datetime(1970, 1, 1, tzinfo=datetime.timezone.utc)).total_seconds())
+    p = canvas.Canvas(f'{ROOT}/{userInfo.first_name}_{userInfo.last_name}/invoice-{time}.pdf')
+    
+    p.setFont("Helvetica-Bold", 20)
+    p.drawString(100, 800, f'Order#{order.order_id} for {userInfo.first_name} {userInfo.last_name}')
+    p.setFont("Helvetica", 12)
+    y_position = 780
+    p.drawString(100, y_position, '----------------------------------------')
+    y_position -= 20
+    for item in orderList:
+        p.drawString(100, y_position, f'Product: {item["name"]}, Quantity: {item["quantity"]}')
+        y_position -= 20
+    p.drawString(100, y_position, '----------------------------------------')
+    y_position -= 20
+    p.drawString(100, y_position, f'Total price: ${order.total_price}, Total items: {order.total_quantity}')
+    y_position -= 20
+    p.drawString(100, y_position, f'Order date: {order.order_date.strftime("%Y-%m-%d %H:%M:%S")}')
+    y_position -= 20
+    p.drawString(100, y_position, f'Email: {userInfo.email}')
+    y_position -= 20
+    p.drawString(100, y_position, f'Phone number: {userInfo.phone_number}')
+    y_position -= 20
+    p.drawString(100, y_position, f'Address: {userInfo.address}')
+    y_position -= 20
+    p.drawString(100, y_position, '----------------------------------------')
+    y_position -= 20
+    p.drawString(100, y_position, f'For any problems, contact us at: alex6damian@gmail.com')
+    y_position -= 20
+    p.drawString(100, y_position, f'Thank you for your order!')
+    p.showPage()
+    p.save()
+    return order
+
+def send_pdf(orderList, user):
+    order = generate_pdf(orderList, user)
+    time = int((timezone.now() - datetime.datetime(1970, 1, 1, tzinfo=datetime.timezone.utc)).total_seconds())
+    email = EmailMessage(
+        subject=f'Order confirmation #{order.order_id}',
+        body='Thank you for your order! Your invoice is attached to this email.',
+        to = [user.email],
+    )
+    email.attach_file(f'{ROOT}\{user.first_name}_{user.last_name}\invoice-{time}.pdf')
+    email.send()
+    
+
+def data_processing(request):
+    if request.method == 'POST':
+        user = request.user
+        try:
+            orderList = json.loads(request.body.decode('utf-8'))
+        except json.JSONDecodeError:
+            return HttpResponse('Invalid data', status=400)
+        send_pdf(orderList, user)
+    return HttpResponse('Data processed successfully')

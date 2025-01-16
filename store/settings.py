@@ -110,7 +110,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'alex6damian@gmail.com'
 EMAIL_HOST_PASSWORD = 'avfaoombjiskyowx'
-DEFAULT_FROM_EMAIL = 'Da-Boss <alex6damian@gmail.com>'
+DEFAULT_FROM_EMAIL = 'Sneaker Store <alex6damian@gmail.com>'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

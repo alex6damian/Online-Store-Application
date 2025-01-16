@@ -33,7 +33,8 @@ urlpatterns = [
     path('grant_permission/', views.grant_permission, name='grant_permission'),
     path('deal/', views.deal, name='deal'),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
-    path('cart/', views.cart, name='cart')
+    path('cart/', views.cart, name='cart'),
+    path('data_processing/', views.data_processing, name='data_processing'),
     ]
 
 if settings.DEBUG:

@@ -5,13 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart</title>
     {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script>
+        const discountCodes = {{ discount_codes|safe }};
+    </script>
     <script src="{% static 'js/cart.js' %}"></script>
 </head>
 <body>
-    <h1>Cart</h1>
-    <div id="cart-items-container">
-        <!-- Cart items will be dynamically inserted here -->
+    {% include 'menu.html' %}
+    <div class="container mt-4">
+        <div class="row">
+            {% csrf_token %}
+            <div id="cart-items-container" class="col-md-8">
+                <!-- Cart items will be dynamically inserted here -->
+            </div>
+            <div class="col-md-4">
+                <h2><span id="total-price" class="badge badge-secondary"></span></h2>
+                <div class="btn-group" role="group" aria-label="Sort buttons">
+                    <button id="sort-by-price" class="btn btn-outline-primary">Sort by Price</button>
+                    <button id="sort-by-name" class="btn btn-outline-secondary">Sort by Name</button>
+                    <button id="checkout-button" class="btn btn-outline-success">Checkout</button>
+                </div>
+            </div>
+            <div id='discount-code-container' class="col-md-4 mt-4">
+                {% comment %} js {% endcomment %}
+            </div>
+        </div>
     </div>
-    <h2>Total: <span id="total-price">0</span></h2>
 </body>
 </html>

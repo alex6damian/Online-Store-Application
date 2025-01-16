@@ -4,20 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Product</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>Add Product</h1>
-    </header>
-    <main>
-        <form method="post">
+    {% include 'menu.html' %}
+    <main class="container mt-5">
+        <form method="post" class="needs-validation" novalidate>
             {% csrf_token %}
             {% for field in form %}
                 <div class="form-group">
                     <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                     {{ field }}
                     {% if field.errors %}
-                        <div class="error">
+                        <div class="invalid-feedback d-block">
                             {% for error in field.errors %}
                                 <p>{{ error }}</p>
                             {% endfor %}
@@ -25,16 +24,18 @@
                     {% endif %}
                 </div>
             {% endfor %}
-            <button type="submit">Submit</button>
-            
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
         {% if form.non_field_errors %}
-            <div class="error">
+            <div class="alert alert-danger mt-3">
                 {% for error in form.non_field_errors %}
                     <p>{{ error }}</p>
                 {% endfor %}
             </div>
         {% endif %}
     </main>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

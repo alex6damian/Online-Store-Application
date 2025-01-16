@@ -4,21 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Added</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>Product Added Successfully</h1>
-    </header>
-    <main>
-        <p>Your product has been added successfully.</p>
-        <a href="{% url 'add_product' %}">Add another product</a>
-    </main>
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}" role="alert">
-                {{ message }}
-            </div>
-        {% endfor %}
+    {% include 'menu.html' %}
+    <main class="container mt-5">
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">Product Added Successfully</h4>
+            <p>Your product has been added successfully.</p>
+            <hr>
+            <a href="{% url 'add_product' %}" class="btn btn-primary">Add another product</a>
+        </div>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
         {% endif %}
         {% if form.errors %}
             <div class="alert alert-danger mt-3">
@@ -31,5 +33,9 @@
                 </ul>
             </div>
         {% endif %}
+    </main>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

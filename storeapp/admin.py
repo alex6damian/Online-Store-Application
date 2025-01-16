@@ -93,6 +93,25 @@ if not Permission.objects.filter(codename=permission_codename).exists():
         content_type=content_type,
     )
 
+permission_name = 'Can add product'
+permission_codename = 'add_product'
+content_type = ContentType.objects.get_for_model(models.Product)
+group_name = 'Add Products'
+if not Permission.objects.filter(codename=permission_codename).exists():
+    Permission.objects.create(
+        codename=permission_codename,
+        name=permission_name,
+        content_type=content_type,
+    )
+
+if not Group.objects.filter(name=group_name).exists():
+    add_products = Group.objects.create(name='Add Products')
+    permission = Permission.objects.get(codename='add_product')
+    add_products.permissions.add(permission)
+    group_member = CustomUser.objects.get(username='alex6damian9')
+    group_member.groups.add(add_products)
+
+print('Admin site customization done!')
 
 # Register models
 admin.site.register(models.Category, CategoryAdmin)

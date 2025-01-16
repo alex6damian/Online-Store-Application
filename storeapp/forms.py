@@ -157,11 +157,12 @@ class AddProduct(forms.ModelForm):
     
     class Meta:
         model = Product
-        fields = ['name', 'price', 'stock', 'category', 'dealer']
+        fields = ['name', 'price', 'stock', 'image_url', 'category', 'dealer']
         labels = {
             'name': 'Product Name',
             'price': 'Price ($)',
             'stock': 'Stock',
+            'image_url': 'Image URL',
             'category' : 'Category',
             'dealer' : 'Dealer',
             }
@@ -169,6 +170,7 @@ class AddProduct(forms.ModelForm):
             'name': 'Enter the product name. Only letters and spaces are allowed.',
             'price': 'Enter the price of the product. Must be a positive number.',
             'stock': 'Enter the stock quantity. Must be a positive number.',
+            'image_url': 'Enter the image URL of the product.',
             'category' : 'Select the category of the product.',
             'dealer' : 'Select the dealer of the product.',
             
@@ -182,6 +184,9 @@ class AddProduct(forms.ModelForm):
             },
             'stock': {
                 'required': 'Stock must be a positive number',
+            },
+            'image_url': {
+                'required': 'Image URL is required',
             },
             'category': {
                 'required': 'Category must be selected',
